@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入 Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .form-container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            width: 100%;
+            font-size: 1.1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+
+        .icon {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .icon i {
+            color: #007bff;
+        }
+
+        .form-container .form-group {
+            margin-bottom: 20px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 15px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        main {
+            padding: 15px;
+        }
+
+
+        /* layout.ejs */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Basic body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header styling */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+        }
+
+        header nav {
+            margin-top: 15px;
+        }
+
+        header nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        header nav a:hover {
+            color: #ddd;
+        }
+
+        /* Main content area styling */
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        /* Layout for tables */
+        .table-container {
+            margin-top: 30px;
+            border: 1px solid #ddd;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        td .action-buttons {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        /* Action button styles */
+        button,
+        .btn-edit,
+        .btn-delete {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button,
+        .btn-edit {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        button:hover,
+        .btn-edit:hover {
+            background-color: #45a049;
+        }
+
+        .btn-delete {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: #d32f2f;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-warning {
+            background-color: #ff9800;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+        }
+
+        .btn-warning:hover {
+            background-color: #fb8c00;
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: white;
+            margin-top: 30px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        header img {
+            max-height: 50px;
+            /* Adjust the height of the logo */
+            margin-right: 20px;
+        }
+
+        header {
+            position: relative;
+            /* 使得 logo 可以相对于 header 定位 */
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            text-align: center;
+        }
+
+        header img {
+            position: absolute;
+            top: 20px;
+            /* 距离顶部的距离 */
+            left: 20px;
+            /* 距离左边的距离 */
+            width: 50px;
+            /* 设置 logo 的宽度 */
+            height: auto;
+            /* 保持 logo 的纵横比 */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="form-container col-md-6">
+            <div class="icon">
+                <i class="fas fa-book fa-4x"></i>
+            </div>
+            <h2>Add a New Book</h2>
+            <!-- Vue.js form binding -->
+            <form @submit.prevent="submitForm">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input v-model="form.title" type="text" id="title" name="title" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="author">Author</label>
+                    <input v-model="form.author" type="text" id="author" name="author" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea v-model="form.description" id="description" name="description" class="form-control"
+                        rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input v-model="form.price" type="number" id="price" name="price" class="form-control" required>
+                </div>
+                <button type="submit" class="btn-submit">Add Book</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Vue.js and Axios (for making POST requests) -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+
+        new Vue({
+            el: '#app',
+            data: {
+                form: {
+                    title: '',
+                    author: '',
+                    description: '',
+                    price: ''
+                }
+            },
+            methods: {
+                submitForm() {
+                    const formData = { ...this.form };
+
+                    axios.post('http://localhost:3001/books/add', formData)
+                        .then(response => {
+                            if (response.data.success) {
+                                alert('Book added successfully!');
+                                // Optionally clear form or redirect to a different page
+                                this.form = { title: '', author: '', description: '', price: '' };
+                            }
+                        })
+                        .catch(error => {
+                            console.error("There was an error submitting the form:", error);
+                            console.log(error);
+
+
+                            alert('There was an error adding the book!');
+                        });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

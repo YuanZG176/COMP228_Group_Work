@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Book Management</title>
+    <!-- <link rel="stylesheet" href="/styles.css">  -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script> <!-- 引入Vue.js -->
+    <link rel="icon" href="../public/favicon.ico" />
+    <style>
+        * {
+            /* margin: 0; */
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        title {
+            margin-left: 200px;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .logo img {
+            height: 40px;
+        }
+
+        nav {
+            margin-top: 15px;
+        }
+
+        nav .nav-link {
+            color: white;
+            margin: 0 15px;
+            font-size: 1.2em;
+        }
+
+        nav .nav-link:hover {
+            color: #ddd;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            margin-top: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .welcome-section p {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        /* Cards Section */
+        .cards-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 30px;
+            justify-items: center;
+        }
+
+        .card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 300px;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 15px;
+            flex-grow: 1;
+        }
+
+        .card-body h3 {
+            font-size: 1.6em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card-body p {
+            margin: 10px 0;
+            color: #666;
+        }
+
+        /* Buttons */
+        .card-body .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-edit {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background-color: #45a049;
+        }
+
+        .btn-delete {
+            background-color: #f44336;
+            color: white;
+            border: none;
+        }
+
+        .btn-delete:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Call to Action Button */
+        .cta-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: white;
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cards-section {
+                padding: 20px;
+            }
+
+            .card-body h3 {
+                font-size: 1.4em;
+            }
+
+            .card-body p {
+                font-size: 0.9em;
+            }
+
+            .btn-primary {
+                font-size: 1.1em;
+                padding: 10px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <header>
+        <div class="logo">
+            <img src="/public/images/logo.png" alt="Logo">
+        </div>
+        <nav>
+            <a href="/books" class="nav-link">Home</a>
+            <a href="/books/add" class="nav-link">Add Book</a>
+        </nav>
+    </header> -->
+
+    <main id="app">
+        <section class="welcome-section">
+            <h2>Welcome to Online Book Management</h2>
+            <p>Manage your book collection with ease!</p>
+        </section>
+
+        <!-- Book Management Cards -->
+        <section class="cards-section">
+            <div class="card" v-for="book in books" :key="book._id">
+                <img :src="book.image" alt="Book Image" class="card-img">
+                <div class="card-body">
+                    <h3>{{ book.title }}</h3>
+                    <p><strong>Author:</strong> {{ book.author }}</p>
+                    <p><strong>Price:</strong> ${{ book.price }}</p>
+                    <p>{{ book.description }}</p>
+                    <a :href="'/books/edit/' + book._id" class="btn btn-edit">Edit</a>
+                    <form :action="'/books/delete/' + book._id" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-delete">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Button -->
+        <!-- <div class="cta-container">
+            <a href="/books/add" class="btn btn-primary btn-lg">Add a New Book</a>
+        </div> -->
+
+        <!-- Footer -->
+        <!-- <footer>
+            <p>&copy; 2024 Online Book Management. All rights reserved.</p>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </footer> -->
+    </main>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                books: [
+                    { _id: '1', title: '1984', author: 'George Orwell', price: 15.5, description: 'A dystopian novel about totalitarianism.', image: '/images/book.png' },
+                    { _id: '2', title: 'To Kill a Mockingbird', author: 'Harper Lee', price: 12.99, description: 'A novel about racial injustice.', image: '/images/100.png' },
+                    { _id: '3', title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', price: 10.75, description: 'A story of decadence and idealism.', image: '/images/200.png' }
+                ]
+            }
+        });
+    </script>
+</body>
+
+</html>

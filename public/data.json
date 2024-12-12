@@ -1,0 +1,62 @@
+[
+    {
+        "title": "To Kill a Mockingbird",
+        "author": "Song Hongli",
+        "description": "A novel about the serious issues of rape and racial inequality, told through the eyes of a young girl in the Deep South.",
+        "price": 12.9913
+    },
+    {
+        "title": "1984",
+        "author": "Du Zhongming",
+        "description": "A dystopian social science fiction novel and cautionary tale about the dangers of totalitarianism.",
+        "price": 16
+    },
+    {
+        "title": "The Great Gatsby",
+        "author": "Cai Hanxiao",
+        "description": "A novel that explores themes of decadence, idealism, resistance to change, social upheaval, and excess.",
+        "price": 12
+    },
+    {
+        "title": "Moby-Dick",
+        "author": "Herman Melville",
+        "description": "The story of the obsessive quest of Captain Ahab for revenge against Moby Dick, the giant white sperm whale.",
+        "price": 16
+    },
+    {
+        "title": "Pride and Prejudice",
+        "author": "Jane Austen",
+        "description": "A romantic novel that also critiques the British landed gentry at the end of the 18th century.",
+        "price": 58
+    },
+    {
+        "title": "The Catcher in the Rye",
+        "author": "J.D. Salinger",
+        "description": "A novel about the struggles of an alienated teenager, Holden Caulfield, in post-war America.",
+        "price": 58
+    },
+    {
+        "title": "The Hobbit",
+        "author": "J.R.R. Tolkien",
+        "description": "A fantasy novel about the journey of Bilbo Baggins as he embarks on an adventure to help a group of dwarves reclaim their homeland.",
+        "price": 75
+    },
+    {
+        "title": "War and Peace",
+        "author": "Leo Tolstoy",
+        "description": "A historical novel that details the French invasion of Russia and the impact of the Napoleonic era on Russian society.",
+        "price": 23
+    },
+    {
+        "title": "The Odyssey",
+        "author": "Homer",
+        "description": "An epic poem about the adventures of Odysseus as he tries to return home after the Trojan War.",
+        "price": 12
+    },
+    {
+        "title": "Brave New World",
+        "author": "Aldous Huxley",
+        "description": "A dystopian novel set in a futuristic world where the government controls every aspect of life, from reproduction to leisure.",
+        "price": 52
+    }
+]

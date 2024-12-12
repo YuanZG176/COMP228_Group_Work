@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入 Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+    <style>
+        body {
+            background-color: #f4f7fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        table th,
+        table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-edit,
+        .btn-delete {
+            color: #007bff;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-edit:hover,
+        .btn-delete:hover {
+            text-decoration: underline;
+        }
+
+        .table-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-buttons a,
+        .action-buttons form {
+            margin-right: 10px;
+        }
+
+        /* Add Book button styling */
+        .btn.btn-primary.btn-lg {
+            background-color: #007bff;
+            /* 按钮的背景色 */
+            color: white;
+            /* 按钮的字体颜色 */
+            padding: 12px 20px;
+            /* 按钮的内边距（上下 12px，左右 20px） */
+            border: none;
+            /* 去除按钮的边框 */
+            border-radius: 5px;
+            /* 设置圆角 */
+            text-decoration: none;
+            /* 去除文本的下划线 */
+            font-size: 16px;
+            /* 设置按钮字体大小 */
+            font-weight: bold;
+            /* 设置字体加粗 */
+            display: inline-block;
+            /* 让按钮成为块元素，可以设置宽度、高度等 */
+            text-align: center;
+            /* 文字居中对齐 */
+            cursor: pointer;
+            /* 鼠标悬停时显示点击手型 */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            /* 按钮交互时的过渡效果 */
+        }
+
+        /* Add Book button hover effect */
+        .btn.btn-primary.btn-lg:hover {
+            background-color: #0056b3;
+            /* 鼠标悬停时改变背景色 */
+            transform: scale(1.05);
+            /* 鼠标悬停时按钮稍微变大 */
+        }
+
+        /* Add Book button active effect */
+        .btn.btn-primary.btn-lg:active {
+            background-color: #004085;
+            /* 鼠标点击时改变背景色 */
+            transform: scale(0.98);
+            /* 鼠标点击时按钮稍微变小 */
+        }
+
+        /* Container for the button */
+        .button-container {
+            display: flex;
+            /* 启用 Flexbox 布局 */
+            justify-content: center;
+            /* 横向居中对齐 */
+            align-items: center;
+            /* 垂直居中对齐 */
+            height: 5vh;
+            /* 设置容器的高度，确保垂直居中 */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="container">
+        <div class="table-container">
+            <h2 class="text-center">Book List</h2>
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Vue.js v-for to loop through books and display each in a table row -->
+                    <% books.forEach(book=> { %>
+                        <tr>
+                            <td>
+                                <%= book.title %>
+                            </td>
+                            <td>
+                                <%= book.author %>
+                            </td>
+                            <td>$<%= book.price %>
+                            </td>
+                            <td>
+                                <%= book.description %>
+                            </td>
+                            <td class="action-buttons">
+                                <!-- Delete form -->
+                                <form action="/books/delete/<%= book._id %>" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                                <!-- Edit link -->
+                                <a href="/books/edit/<%= book._id %>" class="btn btn-warning btn-sm">Edit</a>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+
+            <!-- Add Book Link -->
+            <div class="button-container">
+                <a href="/books/add" class="btn btn-primary btn-lg">Add a New Book</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vue.js and Axios for dynamic handling (You can fetch or update data dynamically) -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                // Sample data, you can dynamically fetch this data from the backend
+                books: [
+                    { _id: '1', title: "1984", author: "George Orwell", price: 15.5, description: "A dystopian novel about totalitarianism." },
+                    { _id: '2', title: "To Kill a Mockingbird", author: "Harper Lee", price: 12.99, description: "A novel about racial injustice." },
+                    { _id: '3', title: "The Great Gatsby", author: "F. Scott Fitzgerald", price: 10.75, description: "A story of decadence and idealism." },
+                    { _id: '4', title: "Moby-Dick", author: "Herman Melville", price: 18.99, description: "The obsessive quest of Captain Ahab." },
+                    { _id: '5', title: "Pride and Prejudice", author: "Jane Austen", price: 8.99, description: "A critique of British landed gentry." }
+                ]
+            },
+            methods: {
+                // Dynamically add a book to the list
+                addBook(book) {
+                    this.books.push(book);
+                },
+
+                // Dynamically remove a book from the list
+                removeBook(bookId) {
+                    this.books = this.books.filter(book => book._id !== bookId);
+                }
+            }
+        });
+    </script>
+</body>
+
+
+</html>

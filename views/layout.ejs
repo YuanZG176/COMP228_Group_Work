@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Book Management</title>
+    <link rel="stylesheet" href="styles/styles.css"> <!-- 连接CSS样式 -->
+    <link rel="icon" href="../public/favicon.ico" />
+
+</head>
+
+<body>
+    <header>
+        <img src="/images/logo.png" alt="Logo">
+        <h1>Online Book Management</h1>
+        <nav>
+            <a href="/books">Home</a>
+            <a href="/books/add">Add Book</a>
+        </nav>
+    </header>
+
+    <main>
+        <%- body %> <!-- express-ejs-layouts 自动填充内容 -->
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Online Book Management. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+</body>
+
+</html>

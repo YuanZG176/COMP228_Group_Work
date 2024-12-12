@@ -1,0 +1,30 @@
+<% include('layout') %>
+    <ul>
+        <% books.forEach(book=> { %>
+            <li>
+                <h3>
+                    <%= book.title %>
+                </h3>
+                <p>Author: <%= book.author %>
+                </p>
+                <p>Price: $<%= book.price.toFixed(2) %>
+                </p>
+                <p>
+                    <%= book.description %>
+                </p>
+                <form action="/books/delete/<%= book._id %>" method="POST">
+                    <a href="/books/edit/<%= book._id %>">Edit</a>
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+            <% }); %>
+    </ul>
+    <main>
+        <ul>
+            <% books.forEach(book=> { %>
+                <li>
+                    <%= book.title %> - <%= book.author %>
+                </li>
+                <% }) %>
+        </ul>
+    </main>
